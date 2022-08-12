@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikun</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="end"></div>
+    <audio id="ngm" src="./m/ngm.mp3"></audio>
+    <div class="btnDiv">
+        <button class="btn">开始</button>
+        <button class="btn">暂停</button>
+        <button class="btn">重新开始</button>
+        <span class="diffSpan">难度：</span>
+        <select id="difficulty">
+            <option value="简单">ikun</option>
+            <option value="中等">真癌粉</option>
+            <option value="困难">小黑子</option>
+            <option value="地狱">坤坤</option>
+        </select>
+        <p class="JifenBan">你的得分：<span class="Fen">0</span></p>
+    </div>
+    <div class="map">
+        
+    </div>
+    <div class="xuanze">
+        <h1>是否开启BGM</h1>
+        <button class="btnn">开启</button>
+        <button class="btnn">不开启</button>
+        <audio id="bgm" src="./m/bgm.mp3"></audio>
+    </div>
+    <div class="heimu"></div>
+    <script src="./js/food.js"></script>
+    <script src="./js/snake.js"></script>
+    <script src="./js/game.js"></script>
+    <script>
+        var btnn = document.querySelectorAll('.btnn');
+        var div = document.querySelector('.xuanze');
+        var heimu = document.querySelector('.heimu');
+        var g = new Gameplay('.map','.Fen','.end');
+
+        btnn[0].onclick = function(){
+            div.style.display = 'none';
+            heimu.style.display = 'none';
+            //播放背景音乐
+            // g.startMP3(g.location() + 'm/bgm.mp3');
+            var bgm = document.querySelector('#bgm');
+            bgm.play();
+            // g.startMP3('../m/bgm.mp3');
+        }
+        btnn[1].onclick = function(){
+            div.style.display = 'none';
+            heimu.style.display = 'none';
+        }
+            
+        
+
+        //判断键盘事件
+        document.onkeydown = function(e){
+            g.changeDirection(e.key);
+        }
+
+        //给按钮判定事件
+        var button = document.querySelectorAll('.btn');
+
+        //开始游戏
+        button[0].onclick = function(){
+            //获取难度
+            var diff = document.querySelector('#difficulty');
+            g.game(diff.value);
+        }
+        //暂定
+        button[1].onclick = function(){
+            g.pasue();
+        }
+
+        //重新开始
+        button[2].onclick = function(){
+            g.restart();
+        }
+    </script>
+</body>
+</html>
