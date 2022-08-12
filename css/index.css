@@ -136,3 +136,29 @@ h1{
     opacity: 0.6;
     z-index: 9998;
 }
+.pd{
+    font-size: 16px;
+    color: red;
+    margin-top: 40px;
+
+}
+.kunkun{
+    text-align: center;
+    font-size: 28px;
+    color: orange;
+    margin-top: 20px;
+}
+.mess{
+    position: absolute;
+    left: 50px;
+    top: 400px;
+    font-size: 20px;
+}
+.niubi{
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 550px;
+    color: red;
+    font-size: 26px;
+}

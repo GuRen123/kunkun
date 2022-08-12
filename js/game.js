@@ -23,16 +23,16 @@ function Gameplay(select,fen,end){
         clearInterval(this.timer);
         //判定难度
         if(diff === '简单'){
-            this.speed = 300;
-        }
-        if(diff === '中等'){
-            this.speed = 200;
-        }
-        if(diff === '困难'){
             this.speed = 100;
         }
+        if(diff === '中等'){
+            this.speed = 80;
+        }
+        if(diff === '困难'){
+            this.speed = 60;
+        }
         if(diff === '地狱'){
-            this.speed = 30;
+            this.speed = 24;
         }
         //禁用开始按钮
         // var btn = document.querySelectorAll('.btn')[0];
@@ -53,16 +53,19 @@ function Gameplay(select,fen,end){
                 this.scoreboard.innerText = this.fen;
                 //播发音频
                 this.startMP3(this.ngm);
+                // 更新食物的坐标
+                this.food.zuobiao();
                 //更新食物的位置
                 this.food.posFood();
+                
             }
             // 判断是否撞墙
             if(this.snake.isDidQ()){
-                this.end();
+                this.end(diff);
             }
             //判断是否撞到自己
             if(this.snake.isDid()){
-                this.end();
+                this.end(diff);
             }
         }, this.speed);
 
@@ -72,21 +75,39 @@ function Gameplay(select,fen,end){
 
     //改变方位
     this.changeDirection = function(type){
-        switch (type) {
-            case 'w' || 'W': this.snake.direction = 'top';break;
-            case 's' || 'S': this.snake.direction = 'bottom';break;
-            case 'a' || 'A': this.snake.direction = 'left';break;
-            case 'd' || 'D': this.snake.direction = 'right';break;
-            default:
-                break;
+        
+        if(type == 39 && this.snake.direction != 'left'){
+            this.snake.direction ='right';
         }
+        if(type == 38 && this.snake.direction != 'bottom'){
+            this.snake.direction ='top';
+        }
+        if(type == 40 && this.snake.direction != 'top'){
+            this.snake.direction ='bottom';
+        }
+        if(type == 37 && this.snake.direction != 'right'){
+            this.snake.direction ='left';
+        }
+
+
+        // switch (type) {
+        //     case 'w' || 'W': this.snake.direction = 'top';break;
+        //     case 's' || 'S': this.snake.direction = 'bottom';break;
+        //     case 'a' || 'A': this.snake.direction = 'left';break;
+        //     case 'd' || 'D': this.snake.direction = 'right';break;
+        //     default:
+        //         break;
+        // }
     }
     //游戏结束
-    this.end = function(){
+    this.end = function(diff){
         clearInterval(this.timer);
         this.endImg.style.display = 'block';
         var btn = document.querySelectorAll('.btn')[0];
         btn.disabled = true;
+        if(diff == '地狱' && this.fen >=10){
+            alert('一眼丁真鉴定为：真癌粉！');
+        }
     }
 
     //重新开始

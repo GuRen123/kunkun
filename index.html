@@ -22,7 +22,14 @@
             <option value="地狱">坤坤</option>
         </select>
         <p class="JifenBan">你的得分：<span class="Fen">0</span></p>
+        <p class="pd">一眼丁真鉴定为：</p>
+        <p class="kunkun">ikun</p>
     </div>
+    <div class="mess">
+        <p>目前最高记录：</p>
+        <p>坤坤模式下吃了100只鸡</p>
+    </div>
+    <p class="niubi">坤坤模式下吃了10只鸡以上有彩蛋哟！</p>
     <div class="map">
         
     </div>
@@ -46,10 +53,12 @@
             div.style.display = 'none';
             heimu.style.display = 'none';
             //播放背景音乐
-            // g.startMP3(g.location() + 'm/bgm.mp3');
             var bgm = document.querySelector('#bgm');
             bgm.play();
-            // g.startMP3('../m/bgm.mp3');
+            setInterval(() => {
+                bgm.play();
+            }, 83000);
+
         }
         btnn[1].onclick = function(){
             div.style.display = 'none';
@@ -60,7 +69,8 @@
 
         //判断键盘事件
         document.onkeydown = function(e){
-            g.changeDirection(e.key);
+            // console.log(e.keyCode);
+            g.changeDirection(e.keyCode);
         }
 
         //给按钮判定事件
@@ -70,6 +80,7 @@
         button[0].onclick = function(){
             //获取难度
             var diff = document.querySelector('#difficulty');
+            diff.disabled = true;
             g.game(diff.value);
         }
         //暂定
